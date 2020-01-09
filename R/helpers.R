@@ -6,13 +6,13 @@
 #' @export
 identify_empty_columns <- function(dataset) {
   dataset %>%
-    gather() %>%
-    group_by(key) %>%
-    unique() %>%
-    summarize(count = n()) %>%
-    filter(count == 1) %>%
-    select(key) %>%
-    pull()
+    tidyr::gather() %>%
+    dplyr::group_by(key) %>%
+    base::unique() %>%
+    dplyr::summarize(count = n()) %>%
+    dplyr::filter(count == 1) %>%
+    dplyr::select(key) %>%
+    dplyr::pull()
 }
 
 #' Remove columns that are "empty" (only one unique variable)
@@ -23,7 +23,7 @@ identify_empty_columns <- function(dataset) {
 #' @export
 remove_extra_columns <- function(dataset) {
   dataset %>%
-    select(-one_of(identify_empty_columns(.)))
+    dplyr::select(-one_of(identify_empty_columns(.)))
 }
 
 
@@ -36,10 +36,10 @@ remove_extra_columns <- function(dataset) {
 #' @export
 count_group <- function(dataset, ...) {
   dataset %>%
-    group_by(...) %>%
-    summarize(count = n()) %>%
-    mutate(prop = count / sum(count)) %>%
-    arrange(-count)
+    dplyr::group_by(...) %>%
+    dplyr::summarize(count = n()) %>%
+    dplyr::mutate(prop = count / sum(count)) %>%
+    dplyr::arrange(-count)
 }
 
 #' Count how many items are in a group
@@ -51,6 +51,6 @@ count_group <- function(dataset, ...) {
 #' @export
 pull_count <- function(dataset) {
   dataset %>%
-    summarize(count = n()) %>%
-    pull(count)
+    dplyr::summarize(count = n()) %>%
+    dplyr::pull(count)
 }
