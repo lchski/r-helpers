@@ -1,0 +1,16 @@
+Package: helpers
+Title: Common Helper Functions
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Lucas",
+           family = "Cherkewski",
+           role = c("aut", "cre"),
+           email = "lucas@lucascherkewski.com")
+Description: Gathers common helper functions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    dplyr,
+    magrittr,
+    tidyr
