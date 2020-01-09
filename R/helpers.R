@@ -9,7 +9,7 @@ identify_empty_columns <- function(dataset) {
     tidyr::gather() %>%
     dplyr::group_by(key) %>%
     base::unique() %>%
-    dplyr::summarize(count = n()) %>%
+    dplyr::summarize(count = dplyr::n()) %>%
     dplyr::filter(count == 1) %>%
     dplyr::select(key) %>%
     dplyr::pull()
@@ -37,7 +37,7 @@ remove_extra_columns <- function(dataset) {
 count_group <- function(dataset, ...) {
   dataset %>%
     dplyr::group_by(...) %>%
-    dplyr::summarize(count = n()) %>%
+    dplyr::summarize(count = dplyr::n()) %>%
     dplyr::mutate(prop = count / sum(count)) %>%
     dplyr::arrange(-count)
 }
@@ -51,6 +51,6 @@ count_group <- function(dataset, ...) {
 #' @export
 pull_count <- function(dataset) {
   dataset %>%
-    dplyr::summarize(count = n()) %>%
+    dplyr::summarize(count = dplyr::n()) %>%
     dplyr::pull(count)
 }
